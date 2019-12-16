@@ -20,7 +20,7 @@ It's recommended you go in this order, which is from easiest to hardest. But if 
 1. `GET users` - print out all users
 2. `GET user [index]` - print out the user with that index value.
 3. `GET friends [index]` - print out all the friends from the user with that index value.
-4. `POST users [name] [age] [eye color]` - add a new user to the data with those attributes. As a stretch goal, add an index value that doesn't conflict with any other user. Print out that you have added a user, and double check by running the first route again.
+4. `POST user [name] [age] [eye color]` - add a new user to the data with those attributes. As a stretch goal, add an index value that doesn't conflict with any other user. Print out that you have added a user, and double check by running the first route again.
 5. `POST friends [index] [name]` - add a new friend with that name property to the user with that index. As a stretch goal, add an index value that doesn't conflict with any other friend of that user.
 6. `PUT user [index] [property name] [new value]` - update the given property of the  user at that index to have the new value.
 7. `DELETE user [index]` - delete the user with that index from the data.
