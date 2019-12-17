@@ -8,11 +8,12 @@ const getUsers = () => {
         let users = JSON.parse(data);
         console.log(users)
     }
-})}
+    })
+}
 
-getUsers()
+// getUsers()
 
-const getUser = function(i){
+const getUser = (i) => {
     fs.readFile('users.json', function(err, data){
         if (err){
             console.log(err);
@@ -21,9 +22,9 @@ const getUser = function(i){
             console.log(users[i]);
 }})}
 
-getUser(2)
+// getUser(2)
 
-const getFriends = function(i){
+const getFriends = (i) => {
     fs.readFile('users.json', function(err, data){
         if (err){
             console.log(err);
@@ -33,23 +34,54 @@ const getFriends = function(i){
         }})
 }
 
-getFriends(1)
+// getFriends(1)
 
+const postUser = (name, age, eyeColor) => {
+    fs.readFile('users.json', function(err, data){
+        if (err){
+            console.log(err);
+        } else {
+            let users = [...JSON.parse(data)];
+            const user = {
+                "index": users.length,
+                "age": age,
+                "eyeColor": eyeColor,
+                "name": name
+            };
+            users.push(user);
+        
+            const data2 = JSON.stringify(users, null, 2);
+            fs.writeFile('users.json', data2, function(){
+                console.log('Added new user');
+            })
+        }
+    })   
+    // console.log(getUsers());
+}
 
-// readline.question("What is your birth date (mmddyyyy)?\n",
-//   (birthDate) => {
-//     readline.setPrompt("What would you like to know?\n1 = Age\n2 = Zodiac sign\n3 = Birthstone\n4 = All of the above\nPress any other key and 'Enter' to exit\n");
-//     readline.prompt();
-//     readline.on('line', (userInput) => {
-//       if (userInput.trim() == "1"){
-//         console.log(age(birthDate));
-//       } else if (userInput.trim() == "2"){
-//         console.log(zodiacSign(birthDate));
-//       } else if (userInput.trim() == "3"){
-//         console.log(birthStone(birthDate));
-//       } else if(userInput.trim() == '4'){
-//         console.log(age(birthDate), zodiacSign(birthDate), birthStone(birthDate));
-//       } else {
-//         console.log("Goodbye")}
-//       readline.close()})
-//   })
+// postUser("Alice Um", "18", "green")
+
+const postNewFriend = (index, name) => {
+    fs.readFile('users.json', function(err, data){
+        if (err){
+            console.log(err);
+        } else {
+            let users = [...JSON.parse(data)];
+            if (!users[index]["friends"]){
+                users[index]["friends"] = [];
+            }
+            const newFriend = {
+                "id": users[index].friends.length,
+                "name": name
+            };
+            users[index].friends.push(newFriend);
+            const data2 = JSON.stringify(users, null, 2);
+            fs.writeFile('users.json', data2, function(){
+                // console.log('Added new user');
+            })
+        }
+    })   
+    // console.log(getUsers());
+}
+
+postNewFriend(10, "Mad Hatter")
